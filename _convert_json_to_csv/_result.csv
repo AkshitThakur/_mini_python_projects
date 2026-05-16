@@ -1,0 +1,3 @@
+id,firstName,lastName,position,email,active
+1, John, Doe, Software Engineer, john.doe@example.com, True
+2, Jane, Smith, Product Manager, jane.smith@example.com, False
