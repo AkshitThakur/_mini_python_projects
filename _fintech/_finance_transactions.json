@@ -1,0 +1,56 @@
+[
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 50000,
+        "category": "Salary",
+        "type": "Income"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 2000,
+        "category": "Groceries",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 1000,
+        "category": "Groceries",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 500,
+        "category": "Groceries",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 1500,
+        "category": "Utilities",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 2500,
+        "category": "Utilities",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 30000,
+        "category": "Freelance Work",
+        "type": "Income"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 500,
+        "category": "Dining Out",
+        "type": "Expense"
+    },
+    {
+        "date": "2026-06-03 12:48:35",
+        "amount": 1000,
+        "category": "Dining Out",
+        "type": "Expense"
+    }
+]
