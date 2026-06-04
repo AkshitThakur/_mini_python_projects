@@ -1,3 +1,5 @@
+#Personal Finance Tracker
+
 import json
 from datetime import datetime
 from pathlib import Path
@@ -90,7 +92,7 @@ def filter_expense_by_category(_category):
         for _tran in _transactions 
         if (_tran["type"]=="Expense" and _tran["category"]==_category)
         )
-    print(f"{_category} : {_total_category_amount} ")
+    return f"{_category} : {_total_category_amount} "
 
 def check_budget(_category, _amount):
     _transactions = load_transactions()
@@ -100,24 +102,32 @@ def check_budget(_category, _amount):
         if (_tran["category"]==_category and _tran["type"]=="Expense")
     )
     if _total_category_expense+_amount > BUDGET_LIMIT[_category]:
-        print(f"Limit Exceeded : {_category} : {_total_category_expense}")
+        return f"Limit Exceeded : {_category} : {_total_category_expense}"
     else:
-        print(f"Within Limit : {_category} : {_total_category_expense}")
+        return f"Within Limit : {_category} : {_total_category_expense}"
 
 def validate_category(_category):
     if _category in VALID_CATEGORIES:
-        print(f"Valid : {_category}")
+        return f"Valid : {_category}"
     else:
-        print(f"Invalid : {_category}")
+        return f"Invalid : {_category}"
 
-validate_category("Groceries")
-validate_category("Utilities")
-validate_category("Dining In")
-validate_category("Entertainment")
+_validate_category_data = [
+    "Groceries",
+    "Utilities",
+    "Dining In",
+    "Entertainment"
+    ]
+for _validate in _validate_category_data:
+    print(validate_category(_validate))
 
-check_budget("Groceries", 1_000)
-check_budget("Utilities", 1_000)
-check_budget("Dining Out", 3_000)
+_check_budget_data = [
+    ("Groceries", 1_000),
+    ("Utilities", 1_000),
+    ("Dining Out", 3_000)
+    ]
+for _budget in _check_budget_data:
+    print(check_budget(*_budget))
 
 _add_transaction_data = [
     (50_000, "Salary", "Income"),
@@ -129,13 +139,17 @@ _add_transaction_data = [
     (30_000, "Freelance Work", "Income"),
     (500, "Dining Out", "Expense"),
     (1_000, "Dining Out", "Expense")
-]
+    ]
 for _add in _add_transaction_data:
     add_transaction(*_add)
 
 
 summary_report()
 
-filter_expense_by_category("Groceries")
-filter_expense_by_category("Utilities")
-filter_expense_by_category("Dining Out")
+_filter_expense_by_category_data = [
+    "Groceries",
+    "Utilities",
+    "Dining Out"
+    ]
+for _category in _filter_expense_by_category_data:
+    print(filter_expense_by_category(_category))
