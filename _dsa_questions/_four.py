@@ -15,6 +15,8 @@ def most_repeated_char(_str):
     print(_repeated_char, _char_dict[_repeated_char])
 most_repeated_char(_str)"""
 
+#time complexity : O(length of string)
+#space complexity : O(unique character in the string)
 _str = "helloworld"
 def most_repeated_char(_str):
     _char_dict = {}

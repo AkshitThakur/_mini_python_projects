@@ -48,6 +48,7 @@ def save_transactions(_transactions):
 def add_transaction(_amount, _category, _transaction_type):
     #load existing transactions
     _transactions = load_transactions()
+    validate_category(_category)
     _transaction = {
         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "amount": _amount,
@@ -118,15 +119,20 @@ check_budget("Groceries", 1_000)
 check_budget("Utilities", 1_000)
 check_budget("Dining Out", 3_000)
 
-add_transaction(50_000, "Salary", "Income")
-add_transaction(2_000, "Groceries", "Expense")
-add_transaction(1_000, "Groceries", "Expense")
-add_transaction(500, "Groceries", "Expense")
-add_transaction(1_500, "Utilities", "Expense")
-add_transaction(2_500, "Utilities", "Expense")
-add_transaction(30_000, "Freelance Work", "Income")
-add_transaction(500, "Dining Out", "Expense")
-add_transaction(1_000, "Dining Out", "Expense")
+_add_transaction_data = [
+    (50_000, "Salary", "Income"),
+    (2_000, "Groceries", "Expense"),
+    (1_000, "Groceries", "Expense"),
+    (500, "Groceries", "Expense"),
+    (1_500, "Utilities", "Expense"),
+    (2_500, "Utilities", "Expense"),
+    (30_000, "Freelance Work", "Income"),
+    (500, "Dining Out", "Expense"),
+    (1_000, "Dining Out", "Expense")
+]
+for _add in _add_transaction_data:
+    add_transaction(*_add)
+
 
 summary_report()
 
