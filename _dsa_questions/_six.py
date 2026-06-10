@@ -3,6 +3,7 @@
 #83*120 = 9960
 #83*121 = 10043
 
+
 """def k_digit(K, X):
     _small_k_digit_num = 10**(K-1) #10000
     _rem = _small_k_digit_num%X #40
