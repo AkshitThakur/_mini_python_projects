@@ -2,16 +2,18 @@
 import json
 
 from pathlib import Path
-FILE_NAME = Path('_health') / "medicine_stock.json"
+DIR = Path("_health")
+FILE_NAME = DIR / "medicine_stock.json"
+LOG_FILE = DIR / "medicine_stock.log"
 DATE_FORMAT = "%Y-%m-%d"
 DEFAULT_THRESHOLD = 100
 from datetime import datetime
 REQUIRED_FIELDS = ("name", "quantity", "expiry_date", "supplier")
 import logging
-LOG_DIR = Path("_health")
+
 
 logging.basicConfig(
-    filename= LOG_DIR / "medicine_stock.log",
+    filename= LOG_FILE,
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s"
 )
@@ -38,7 +40,6 @@ def validate_medicine_data(_medicine):
             logger.warning(f"Validation failed. Missing field: {field}")
             return f"Invalid Field {field}"
 
-
 def add_medicine(_load_medicine_stocks, _medicine_id, _name, _quantity, _expiry_date, _supplier):
     if _medicine_id in _load_medicine_stocks.keys():
         logger.warning(f"Duplicate medicine attempted. ID={_medicine_id}")
@@ -54,7 +55,7 @@ def add_medicine(_load_medicine_stocks, _medicine_id, _name, _quantity, _expiry_
         "supplier" : _supplier
     }
     if alert := validate_medicine_data(_medicine):
-        return f"{alert}"
+        return alert
     _load_medicine_stocks[_medicine_id] = _medicine
     save_stock(_load_medicine_stocks)
     logger.info(f"Medicine added. ID={_medicine_id}, Name={_name}, Quantity={_quantity}")

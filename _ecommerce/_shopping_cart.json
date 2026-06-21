@@ -1,0 +1,32 @@
+{
+    "M001": {
+        "name": "Laptop",
+        "price": 1000,
+        "quantity": 1,
+        "total_cost": 1000
+    },
+    "M002": {
+        "name": "Smartphone",
+        "price": 500,
+        "quantity": 2,
+        "total_cost": 1000
+    },
+    "M003": {
+        "name": "Headphones",
+        "price": 100,
+        "quantity": 3,
+        "total_cost": 300
+    },
+    "M004": {
+        "name": "Keyboard",
+        "price": 50,
+        "quantity": 1,
+        "total_cost": 50
+    },
+    "M005": {
+        "name": "Mouse",
+        "price": 25,
+        "quantity": 2,
+        "total_cost": 50
+    }
+}
