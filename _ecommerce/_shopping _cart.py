@@ -48,8 +48,8 @@ def load_carts():
             carts = json.load(file)
             logger.info("Carts loaded successfully")
             return carts
-    except (FileNotFoundError, json.JSONDecodeError):
-        logger.error(f"_shopping_cart.json is corrupted.")
+    except json.JSONDecodeError:
+        logger.warning(f"File is empty.")
         return {}
 
 def save_cart(cart):
@@ -69,7 +69,16 @@ def validate_cart_fields(cart):
             logger.warning(f"Validation failed. Missing field: {field}")
             return f"Invalid Field {field}"
 
-def add_to_cart(id, name, price, quantity): 
+def validate_stock(id, quantity, available_stock):
+    """
+    Function to check the availability in stock
+    """
+    if quantity > available_stock:
+        logger.warning(f"ID {id} : buying {quantity} stocks but available {available_stock}")
+        return f"Not enough Stocks are available"
+    logger.info(f"Stocks are available for ID: {id}!!!")
+
+def add_to_cart(id, name, price, quantity, available_stock): 
     """
     Function to add new cart!!!
     """  
@@ -77,6 +86,8 @@ def add_to_cart(id, name, price, quantity):
     if id in carts:
         logger.info(f"Cart {name} already exists!!!")
         return f"{name} already exists."
+    if alert := validate_stock(id, quantity, available_stock):
+        return alert
     cart = {
         'name' : name,
         'price' : price,
@@ -100,7 +111,7 @@ def view_carts():
     return f"Cart have {len(carts)} items."
     
 
-def update_cart(id, quantity):
+def update_cart(id, quantity, available_stock):
     """
     Function to update quantity of a specific item
     """
@@ -109,6 +120,8 @@ def update_cart(id, quantity):
     if not cart:
         logger.warning(f"Cart ID:{id} does not exists!!!")
         return f"Cart ID:{id} does not exists."
+    if alert := validate_stock(id, quantity, available_stock):
+        return alert
     cart["quantity"] = quantity
     cart["total_cost"] = round(cart["price"]*quantity, 2)
     carts[id] = cart
@@ -144,18 +157,19 @@ def checkout():
     logger.info(f"Total checkout amount: {total_checkout}, items: {len(carts)}")
     return f"Total checkout amount : {total_checkout}"
 
-cart1 = ("M001", "Laptop", 1000, 1)
-cart2 = ("M002", "Smartphone", 500, 2)
-cart3 = ("M003", "Headphones", 100, 3)
-cart4 = ("M004", "Keyboard", 50, 1)
-cart5 = ("M005", "Mouse", 25, 2)
-cart6 = ("M006", "Monitor", 200, 1)
+cart1 = ("M001", "Laptop", 1000, 1, 2)
+cart2 = ("M002", "Smartphone", 500, 2, 3)
+cart3 = ("M003", "Headphones", 100, 3, 1)
+cart4 = ("M004", "Keyboard", 50, 1, 3)
+cart5 = ("M005", "Mouse", 25, 2, 0)
+cart6 = ("M006", "Monitor", 200, 1, 1)
 cart_list = [cart1, cart2, cart3, cart4, cart5, cart6]
 
 for cart in cart_list:
     print(add_to_cart(*cart))
-
 print(view_carts())
-print(update_cart("M006", 3))
+print(update_cart("M002", 3, 2))
 print(remove_from_cart("M006"))
 print(checkout())
+print(validate_stock("M002", 5, 10))
+print(validate_stock("M004", 7, 5)) 
