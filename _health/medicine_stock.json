@@ -1,0 +1,38 @@
+{
+    "M002": {
+        "name": "Ibuprofen",
+        "quantity": 50,
+        "expiry_date": "2028-06-30",
+        "supplier": "XYZ Pharma"
+    },
+    "M006": {
+        "name": "Aspirin",
+        "quantity": 80,
+        "expiry_date": "2027-08-31",
+        "supplier": "GHI Pharma"
+    },
+    "M001": {
+        "name": "Paracetamol",
+        "quantity": 100,
+        "expiry_date": "2025-12-31",
+        "supplier": "ABC Pharma"
+    },
+    "M003": {
+        "name": "Amoxicillin",
+        "quantity": 200,
+        "expiry_date": "2026-03-15",
+        "supplier": "LMN Pharma"
+    },
+    "M004": {
+        "name": "Cetirizine",
+        "quantity": 75,
+        "expiry_date": "2023-09-30",
+        "supplier": "PQR Pharma"
+    },
+    "M005": {
+        "name": "Metformin",
+        "quantity": 150,
+        "expiry_date": "2024-11-30",
+        "supplier": "DEF Pharma"
+    }
+}

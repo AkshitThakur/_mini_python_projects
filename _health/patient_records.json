@@ -1,0 +1,36 @@
+{
+    "001": {
+        "name": "John Doe",
+        "age": 32,
+        "gender": "Male",
+        "medical_history": [
+            "Diabetes",
+            "Hypertension"
+        ]
+    },
+    "003": {
+        "name": "Alice Johnson",
+        "age": 45,
+        "gender": "Female",
+        "medical_history": [
+            "Arthritis"
+        ]
+    },
+    "004": {
+        "name": "Bob Brown",
+        "age": 50,
+        "gender": "Male",
+        "medical_history": [
+            "Heart Disease"
+        ]
+    },
+    "005": {
+        "name": "Charlie Davis",
+        "age": 38,
+        "gender": "Male",
+        "medical_history": [
+            "High Cholesterol",
+            "High BP"
+        ]
+    }
+}
