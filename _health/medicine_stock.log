@@ -1,0 +1,28 @@
+2026-06-21 18:04:17,695 INFO Medicine stock loaded successfully.
+2026-06-21 18:04:17,695 WARNING Validation failed. Missing field: expiry_date
+2026-06-21 18:04:17,737 INFO Expired medicines checked. Found 4 medicines.
+2026-06-21 18:04:17,737 INFO Removing expired medicine M001
+2026-06-21 18:04:17,737 INFO Removing expired medicine M003
+2026-06-21 18:04:17,737 INFO Removing expired medicine M004
+2026-06-21 18:04:17,737 INFO Removing expired medicine M005
+2026-06-21 18:04:17,737 INFO Medicine stock saved successfully.
+2026-06-21 18:04:17,737 INFO 4 expired medicines removed.
+2026-06-21 18:04:17,737 WARNING Low stock detected for M002
+2026-06-21 18:04:17,737 WARNING Low stock detected for M006
+2026-06-21 18:04:17,737 INFO Expired medicines checked. Found 0 medicines.
+2026-06-21 18:04:17,737 WARNING Medicine not found: M001
+2026-06-21 18:04:17,738 INFO Medicine searched: M002
+2026-06-21 18:04:17,738 WARNING Medicine not found: M003
+2026-06-21 18:04:17,738 WARNING Medicine not found: M004
+2026-06-21 18:04:17,738 WARNING Medicine not found: M005
+2026-06-21 18:04:17,738 INFO Medicine searched: M006
+2026-06-21 18:04:17,738 INFO Medicine stock saved successfully.
+2026-06-21 18:04:17,738 INFO Medicine added. ID=M001, Name=Paracetamol, Quantity=100
+2026-06-21 18:04:17,738 WARNING Duplicate medicine attempted. ID=M002
+2026-06-21 18:04:17,738 INFO Medicine stock saved successfully.
+2026-06-21 18:04:17,738 INFO Medicine added. ID=M003, Name=Amoxicillin, Quantity=200
+2026-06-21 18:04:17,739 INFO Medicine stock saved successfully.
+2026-06-21 18:04:17,739 INFO Medicine added. ID=M004, Name=Cetirizine, Quantity=75
+2026-06-21 18:04:17,739 INFO Medicine stock saved successfully.
+2026-06-21 18:04:17,739 INFO Medicine added. ID=M005, Name=Metformin, Quantity=150
+2026-06-21 18:04:17,739 WARNING Duplicate medicine attempted. ID=M006

@@ -1,31 +1,52 @@
 # Medicine Stock Management
 import json
+
 from pathlib import Path
+FILE_NAME = Path('_health') / "medicine_stock.json"
+DATE_FORMAT = "%Y-%m-%d"
+DEFAULT_THRESHOLD = 100
 from datetime import datetime
-FILE_NAME = Path('_health/medicine_stock.json')
-THRESHOLD = 100
 REQUIRED_FIELDS = ("name", "quantity", "expiry_date", "supplier")
+import logging
+LOG_DIR = Path("_health")
+
+logging.basicConfig(
+    filename= LOG_DIR / "medicine_stock.log",
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 def load_stocks():
     try:
-        with open(FILE_NAME, 'r') as file:
-            return json.load(file)
+        with FILE_NAME.open('r', encoding="utf-8") as file:
+            medicines =  json.load(file)
+            logger.info("Medicine stock loaded successfully.")
+            return medicines
     except (FileNotFoundError, json.JSONDecodeError):
+        logger.error("medicine_stock.json is corrupted.")
         return {}
 
 def save_stock(_medicines):
-    with open(FILE_NAME, 'w') as file:
-        json.dump(_medicines, file, indent=4)
+    with FILE_NAME.open('w', encoding="utf-8") as file:
+        json.dump(_medicines, file, indent=4, ensure_ascii=False)
+    logger.info("Medicine stock saved successfully.")
 
 def validate_medicine_data(_medicine):
     for field in REQUIRED_FIELDS:
-        if field not in _medicine.keys():
+        if field not in _medicine:
+            logger.warning(f"Validation failed. Missing field: {field}")
             return f"Invalid Field {field}"
 
 
 def add_medicine(_load_medicine_stocks, _medicine_id, _name, _quantity, _expiry_date, _supplier):
     if _medicine_id in _load_medicine_stocks.keys():
+        logger.warning(f"Duplicate medicine attempted. ID={_medicine_id}")
         return f"Medicine {_name} already exists !!!"
+    if _quantity < 0:
+        raise ValueError("Quantity cannot be negative")
+    if not _supplier.strip():
+        raise ValueError("Supplier cannot be empty.")
     _medicine = {
         "name" : _name,
         "quantity" : _quantity,
@@ -36,36 +57,40 @@ def add_medicine(_load_medicine_stocks, _medicine_id, _name, _quantity, _expiry_
         return f"{alert}"
     _load_medicine_stocks[_medicine_id] = _medicine
     save_stock(_load_medicine_stocks)
+    logger.info(f"Medicine added. ID={_medicine_id}, Name={_name}, Quantity={_quantity}")
     return f"Medicine {_name} added successfully !!!"
 
 def get_medicine(_load_medicine_stocks, _medicine_id):
-    return _load_medicine_stocks.get(_medicine_id, "Medicine Record Not Found")
+    medicine = _load_medicine_stocks.get(_medicine_id)
+    if medicine:
+        logger.info(f"Medicine searched: {_medicine_id}")
+        return medicine
+    logger.warning(f"Medicine not found: {_medicine_id}")
+    return "Medicine Record Not Found"
 
 def check_expired_medicines(_load_medicine_stocks):
-    today = datetime.today().strftime("%Y-%m-%d")
-    expired_medicines = {
-        _id : _details
+    expired_medicines = [
+        _id 
         for _id, _details in _load_medicine_stocks.items()
-        if _details["expiry_date"] < today
-    }
-    return (
-        list(expired_medicines)
-        if expired_medicines
-        else
-        "No expired medicine found"
-    )
+        if datetime.strptime(_details["expiry_date"], DATE_FORMAT).date() < datetime.today().date()
+    ]
+    logger.info(f"Expired medicines checked. Found {len(expired_medicines)} medicines.")
+    return expired_medicines
 
 def remove_expired_medicines(_load_medicine_stocks):
     expired_medicines_ids = check_expired_medicines(_load_medicine_stocks)
-    for medicine_id in expired_medicines_ids:
-        del _load_medicine_stocks[medicine_id]
+    for _id in expired_medicines_ids:
+        logger.info(f"Removing expired medicine {_id}")
+        del _load_medicine_stocks[_id]
     save_stock(_load_medicine_stocks)
+    logger.info(f"{len(expired_medicines_ids)} expired medicines removed.")
     return f"{len(expired_medicines_ids)} expired medicines are removed form the stock"
 
 def check_low_stocks(_load_medicine_stocks, _medicine_id, _threshold):
     if _medicine_id not in _load_medicine_stocks.keys():
         return "Medicine record not sfound"
     if _load_medicine_stocks[_medicine_id]["quantity"] < _threshold:
+        logger.warning(f"Low stock detected for {_medicine_id}")
         return f"Low stock for medicine {_load_medicine_stocks[_medicine_id]["name"]}"
     return "Stock level are sufficient"
 
@@ -80,29 +105,24 @@ _medicine6 = ("M006", "Aspirin", 80, "2027-08-31", "GHI Pharma")
 
 _medicines = [_medicine1, _medicine2, _medicine3, _medicine4, _medicine5, _medicine6]
 
-def sync_inventory_with_database(medicine):
-    sql_query = f"INSERT INTO medicine_stock (name, quantity, expiry_date, supplier) VALUES ('{medicine['name']}', {medicine['quantity']}, '{medicine['expiry_date']}', '{medicine['supplier']}')"
-    return f"Medicine record synced with database: {sql_query}"
+print(validate_medicine_data({
+    "name": "Aspirin",
+    "quantity": 80,
+    "expir_date": "2027-08-31",
+    "supplier": "GHI Pharma"
+}))
 
+print(remove_expired_medicines(_load_medicine_stocks))
 
-# print(validate_medicine_data({
-#     "name": "Aspirin",
-#     "quantity": 80,
-#     "expir_date": "2027-08-31",
-#     "supplier": "GHI Pharma"
-# }))
+for medicine in _medicines:
+    print(check_low_stocks(_load_medicine_stocks, medicine[0], DEFAULT_THRESHOLD))
 
-# print(remove_expired_medicines(_load_medicine_stocks))
+print(check_expired_medicines(_load_medicine_stocks))
 
-# for medicine in _medicines:
-#     print(check_low_stocks(_load_medicine_stocks, medicine[0], THRESHOLD))
+for medicine in _medicines:
+    print(get_medicine(_load_medicine_stocks, medicine[0]))
 
-# print(check_expired_medicines(_load_medicine_stocks))
-
-# for medicine in _medicines:
-#     print(get_medicine(_load_medicine_stocks, medicine[0]))
-
-# for medicine in _medicines:
-#     print(add_medicine(_load_medicine_stocks, *medicine))
+for medicine in _medicines:
+    print(add_medicine(_load_medicine_stocks, *medicine))
 
 
