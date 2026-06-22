@@ -1,0 +1,44 @@
+{
+    "P001": {
+        "name": "Steel Rods",
+        "quantity": 85,
+        "reorder_level": 20,
+        "supplier": "Steel Co."
+    },
+    "P002": {
+        "name": "Aluminum Sheets",
+        "quantity": 50,
+        "reorder_level": 10,
+        "supplier": "Aluminum Inc."
+    },
+    "P003": {
+        "name": "Copper Wires",
+        "quantity": 200,
+        "reorder_level": 30,
+        "supplier": "Copper Ltd."
+    },
+    "P004": {
+        "name": "Plastic Pellets",
+        "quantity": 300,
+        "reorder_level": 50,
+        "supplier": "Plastic Corp."
+    },
+    "P005": {
+        "name": "Rubber Gaskets",
+        "quantity": 150,
+        "reorder_level": 25,
+        "supplier": "Rubber Co."
+    },
+    "P006": {
+        "name": "Glass Panels",
+        "quantity": 80,
+        "reorder_level": 15,
+        "supplier": "Glass Inc."
+    },
+    "P007": {
+        "name": "Wooden Planks",
+        "quantity": 120,
+        "reorder_level": 20,
+        "supplier": "Wood Co."
+    }
+}
