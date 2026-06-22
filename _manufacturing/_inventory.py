@@ -25,7 +25,6 @@ console_handler.setFormatter(
     )
 )
 logger.addHandler(console_handler)
-
 file_handler = logging.FileHandler(LOG_FILE)
 file_handler.setFormatter(
     logging.Formatter(
