@@ -1,0 +1,18 @@
+{
+    "DISC10": {
+        "type": "percentage",
+        "value": 10
+    },
+    "FLAT500": {
+        "type": "fixed",
+        "value": 500
+    },
+    "BOGO50": {
+        "type": "bogo",
+        "value": 0
+    },
+    "BULK20": {
+        "type": "bulk",
+        "value": 20
+    }
+}
