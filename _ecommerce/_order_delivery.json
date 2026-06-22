@@ -1,0 +1,50 @@
+{
+    "A001": {
+        "customer_name": "John Doe",
+        "product_name": "Laptop",
+        "quantity": 1,
+        "status": "Processing",
+        "delivery_date": "2026-06-27",
+        "location": "New York"
+    },
+    "A002": {
+        "customer_name": "Jane Smith",
+        "product_name": "Smartphone",
+        "quantity": 2,
+        "status": "Processing",
+        "delivery_date": "2026-06-27",
+        "location": "Los Angeles"
+    },
+    "A003": {
+        "customer_name": "Alice Johnson",
+        "product_name": "Headphones",
+        "quantity": 3,
+        "status": "Processing",
+        "delivery_date": "2026-06-27",
+        "location": "Chicago"
+    },
+    "A004": {
+        "customer_name": "Bob Brown",
+        "product_name": "Tablet",
+        "quantity": 1,
+        "status": "Processing",
+        "delivery_date": "2026-06-27",
+        "location": "Houston"
+    },
+    "A005": {
+        "customer_name": "Charlie Davis",
+        "product_name": "Camera",
+        "quantity": 2,
+        "status": "Processing",
+        "delivery_date": "2026-06-27",
+        "location": "Phoenix"
+    },
+    "A007": {
+        "customer_name": "Eva Martinez",
+        "product_name": "Printer",
+        "quantity": 1,
+        "status": "Shipped",
+        "delivery_date": "2026-06-27",
+        "location": "San Antonio"
+    }
+}
