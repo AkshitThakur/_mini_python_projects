@@ -1,0 +1,23 @@
+{
+    "User001": {
+        "Movies": {
+            "Action": [
+                "Mad Max",
+                "John Wick"
+            ]
+        },
+        "Music": {
+            "Rock": [
+                "Bohemian Rhapsody"
+            ]
+        }
+    },
+    "User002": {
+        "Movies": {},
+        "Music": {
+            "Pop": [
+                "Blinding Lights"
+            ]
+        }
+    }
+}
